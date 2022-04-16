@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  # MySQL
+  izayoiwind-asterisk-db:
+    image: mysql:8.0.28
+    container_name: izayoiwind-asterisk-db
+    environment:
+      MYSQL_ROOT_PASSWORD: Izay0iw1nD_AstEr1sK
+      TZ: 'Asia/Tokyo'
+      BIND-ADDRESS: 0.0.0.0
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+    - ./izayoiwind-asterisk-db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    network_mode: "host"
+  # App
+  izayoiwind-asterisk-app:
+    image: izayoiwind-asterisk-app:latest
+    container_name: izayoiwind-asterisk-app
+    tty: true
+    command: /bin/bash -c "/usr/sbin/atd && /usr/sbin/asterisk && /bin/bash"
+    network_mode: "host"
