@@ -1,10 +1,10 @@
 # Asteriskお遊び用環境構築スクリプト
 
-本スクリプトは私、はるかなぎがYouTube等で電話関係のネタを公開する際等に使用しているAsterisk環境と同等の環境をDockerコンテナ内に構築するためのスクリプトです。  
+本スクリプトは私、はるかなぎがYouTube等で電話関係のネタを公開する際等に使用しているAsterisk環境と同等の環境をDockerで構築するためのスクリプトです。  
 
 ## 構築方法
 
-以下のコマンドを実行するだけで簡単に構築可能です。予めDockerおよびDocker Composeをインストールしておく必要があります。   
+以下のコマンドを実行するだけで簡単に構築可能です。あらかじめDockerおよびDocker Composeをインストールしておく必要があります。   
 なお、Asteriskの性質上「network_mode: "host"」で構成していますので、専用でサーバを用意することを推奨します。
 
 ```bash
@@ -15,7 +15,7 @@ $ ./izayoiwind-asterisk-app/build.sh
 $ docker-compose up -d
 ```
 
-最後のdocker-composeコマンドを実行してしばらく待つと、発着信が可能な環境が構築されます。DBの構築に少々時間がかかります。（性能にもよりますが、5分程度を見込んでください。）
+最後のdocker-composeコマンドを実行してしばらく待つと、自動的に環境が構築されます。DBの構築に少々時間がかかります。（性能にもよりますが、5分程度を見込んでください。）
 
 ## セキュリティに関する注意
 
@@ -60,7 +60,7 @@ $ docker-compose up -d
 
 ### トーキーについて
 
-本スクリプトに同梱しているトーキーは全て[「VOICEVOX:四国めたん」](https://voicevox.hiroshiba.jp/)で生成したものとなります。  
+本スクリプトに同梱しているトーキーはすべて[「VOICEVOX:四国めたん」](https://voicevox.hiroshiba.jp/)で生成したものとなります。  
 gsmとwavの2つの形式で同梱しております。（実際に使用するのはgsmの方になります）
 
 ## 動作確認済みクライアント
@@ -68,16 +68,14 @@ gsmとwavの2つの形式で同梱しております。（実際に使用する�
 - AgePhone（iOS／Android）
 - FOMA N-02B
   - 同一LAN内の場合、ps_endpointsテーブルのrewrite_contactとrtp_symmetricをnoにしないと着信がうまくいきません。
-- FOMA N-07E
-  - 同一LAN内の場合、ps_endpointsテーブルのrewrite_contactとrtp_symmetricをnoにしないと着信がうまくいきません。
 
 # ライセンス
 
-GPL v3とします。ただし、以下のファイルについては個別にライセンスが定められているため、そちらに従ってください。
+GPL v3とします。ただし、以下のファイルについては個別にライセンスが定められているため、そちらにしたがってください。
 
 ## Asterisk関連
 
-[Asterisk](https://www.asterisk.org/)のライセンス（GPL v2）に従って利用してください。
+[Asterisk](https://www.asterisk.org/)のライセンス（GPL v2）にしたがって利用してください。
 
 * /izayoiwind-asterisk-app/resources/asterisk-18.11.2.tar.gz  
 * /izayoiwind-asterisk-app/resources/config/etc/asterisk/*  
@@ -86,23 +84,23 @@ GPL v3とします。ただし、以下のファイルについては個別に�
 
 ## MySQL関連
 
-[MySQL Community Edition](https://www.mysql.com/jp/products/community/)のライセンス（GPL v2）に従って利用してください。
+[MySQL Community Edition](https://www.mysql.com/jp/products/community/)のライセンス（GPL v2）にしたがって利用してください。
 
 * /izayoiwind-asterisk-base/resources/mysql-community-client-plugins/*  
 * /izayoiwind-asterisk-base/resources/mysql-connector-odbc/*  
 
 ## VOICEVOX関連
 
-[「VOICEVOX利用規約」](https://voicevox.hiroshiba.jp/term)および[「ずんだもん、四国めたん音源利用規約」](https://zunko.jp/con_ongen_kiyaku.html)に従って利用してください。
+[「VOICEVOX利用規約」](https://voicevox.hiroshiba.jp/term)および[「ずんだもん、四国めたん音源利用規約」](https://zunko.jp/con_ongen_kiyaku.html)にしたがって利用してください。
 
 * /izayoiwind-asterisk-app/resources/voice/*  
 
 # 参考資料
 
-Asterisk Project Wiki
+Asterisk Project Wiki  
 [https://wiki.asterisk.org/wiki/display/AST/Home](https://wiki.asterisk.org/wiki/display/AST/Home)
 
-TR-9022 - NGNにおける網付与ユーザID情報転送に関する技術レポート
+TR-9022 - NGNにおける網付与ユーザID情報転送に関する技術レポート  
 [https://www.ttc.or.jp/application/files/8215/5436/1416/TR-9022v2.pdf](https://www.ttc.or.jp/application/files/8215/5436/1416/TR-9022v2.pdf)
 
 Asterisk基本設定ガイド！  
