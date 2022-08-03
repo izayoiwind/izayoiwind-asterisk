@@ -17,6 +17,14 @@ $ docker-compose up -d
 
 最後のdocker-composeコマンドを実行してしばらく待つと、自動的に環境が構築されます。DBの構築に少々時間がかかります。（性能にもよりますが、5分程度を見込んでください。）
 
+## Dockerコンテナへの入り方
+
+以下のコマンドでDockerコンテナに入ることが可能です。
+
+```bash
+$ docker exec -it izayoiwind-asterisk-app /bin/bash
+```
+
 ## セキュリティに関する注意
 
 本スクリプトでは、外部公開を行う場合のセキュリティ等については考慮しておりませんので、外部公開を行う場合は、パスワードおよびポートの変更（同時に構築されるMySQLも含む）およびファイアウォール等の設定を行うことを強く推奨します。
@@ -77,7 +85,7 @@ GPL v3とします。ただし、以下のファイルについては個別に�
 
 [Asterisk](https://www.asterisk.org/)のライセンス（GPL v2）にしたがって利用してください。
 
-* /izayoiwind-asterisk-app/resources/asterisk-18.11.2.tar.gz  
+* /izayoiwind-asterisk-app/resources/asterisk-18.30.0.tar.gz  
 * /izayoiwind-asterisk-app/resources/config/etc/asterisk/*  
 * /izayoiwind-asterisk-db/docker-entrypoint-initdb.d/02_mysql_config.sql  
 * /izayoiwind-asterisk-db/docker-entrypoint-initdb.d/03_mysql_cdr.sql  
