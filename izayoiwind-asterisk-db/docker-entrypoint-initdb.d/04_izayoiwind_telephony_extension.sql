@@ -49,10 +49,25 @@ INSERT INTO extensions (`id`, `context`, `exten`, `priority`, `app`, `appdata`) 
 INSERT INTO extensions (`id`, `context`, `exten`, `priority`, `app`, `appdata`) VALUES ('32', 'internal', '184111', '2', 'Playback', 'izayoiwind-testcall-dialing');
 INSERT INTO extensions (`id`, `context`, `exten`, `priority`, `app`, `appdata`) VALUES ('33', 'internal', '184111', '3', 'Wait', '1');
 INSERT INTO extensions (`id`, `context`, `exten`, `priority`, `app`, `appdata`) VALUES ('34', 'internal', '184111', '4', 'Hangup', '');
+-- 着信試験開始（別番）ダイヤルプラン追加
+INSERT INTO extensions (`id`, `context`, `exten`, `priority`, `app`, `appdata`) VALUES ('35', 'internal', '411', '1', 'AGI', 'testcall.py');
+INSERT INTO extensions (`id`, `context`, `exten`, `priority`, `app`, `appdata`) VALUES ('36', 'internal', '411', '2', 'Playback', 'izayoiwind-testcall-dialing');
+INSERT INTO extensions (`id`, `context`, `exten`, `priority`, `app`, `appdata`) VALUES ('37', 'internal', '411', '3', 'Wait', '1');
+INSERT INTO extensions (`id`, `context`, `exten`, `priority`, `app`, `appdata`) VALUES ('38', 'internal', '411', '4', 'Hangup', '');
+-- 着信試験開始（別番_186強制付与端末）ダイヤルプラン追加
+INSERT INTO extensions (`id`, `context`, `exten`, `priority`, `app`, `appdata`) VALUES ('39', 'internal', '186411', '1', 'AGI', 'testcall.py');
+INSERT INTO extensions (`id`, `context`, `exten`, `priority`, `app`, `appdata`) VALUES ('40', 'internal', '186411', '2', 'Playback', 'izayoiwind-testcall-dialing');
+INSERT INTO extensions (`id`, `context`, `exten`, `priority`, `app`, `appdata`) VALUES ('41', 'internal', '186411', '3', 'Wait', '1');
+INSERT INTO extensions (`id`, `context`, `exten`, `priority`, `app`, `appdata`) VALUES ('42', 'internal', '186411', '4', 'Hangup', '');
+-- 着信試験開始（別番_184強制付与端末）ダイヤルプラン追加
+INSERT INTO extensions (`id`, `context`, `exten`, `priority`, `app`, `appdata`) VALUES ('43', 'internal', '184411', '1', 'AGI', 'testcall.py');
+INSERT INTO extensions (`id`, `context`, `exten`, `priority`, `app`, `appdata`) VALUES ('44', 'internal', '184411', '2', 'Playback', 'izayoiwind-testcall-dialing');
+INSERT INTO extensions (`id`, `context`, `exten`, `priority`, `app`, `appdata`) VALUES ('45', 'internal', '184411', '3', 'Wait', '1');
+INSERT INTO extensions (`id`, `context`, `exten`, `priority`, `app`, `appdata`) VALUES ('46', 'internal', '184411', '4', 'Hangup', '');
 -- 着信試験ダイヤルプラン追加
-INSERT INTO extensions (`id`, `context`, `exten`, `priority`, `app`, `appdata`) VALUES ('35', 'internal', '9211010001', '1', 'Playback', 'izayoiwind-testcall-incoming');
-INSERT INTO extensions (`id`, `context`, `exten`, `priority`, `app`, `appdata`) VALUES ('36', 'internal', '9211010001', '2', 'Goto', '1');
+INSERT INTO extensions (`id`, `context`, `exten`, `priority`, `app`, `appdata`) VALUES ('47', 'internal', '9211010001', '1', 'Playback', 'izayoiwind-testcall-incoming');
+INSERT INTO extensions (`id`, `context`, `exten`, `priority`, `app`, `appdata`) VALUES ('48', 'internal', '9211010001', '2', 'Goto', '1');
 -- エンジェルライン用番号
-INSERT INTO extensions (`id`, `context`, `exten`, `priority`, `app`, `appdata`) VALUES ('37', 'internal', '0190104104', '1', 'Playback', 'izayoiwind-not-supported');
-INSERT INTO extensions (`id`, `context`, `exten`, `priority`, `app`, `appdata`) VALUES ('38', 'internal', '0190104104', '2', 'Wait', '1');
-INSERT INTO extensions (`id`, `context`, `exten`, `priority`, `app`, `appdata`) VALUES ('39', 'internal', '0190104104', '3', 'Hangup', '');
+INSERT INTO extensions (`id`, `context`, `exten`, `priority`, `app`, `appdata`) VALUES ('49', 'internal', '0190104104', '1', 'Playback', 'izayoiwind-not-supported');
+INSERT INTO extensions (`id`, `context`, `exten`, `priority`, `app`, `appdata`) VALUES ('50', 'internal', '0190104104', '2', 'Wait', '1');
+INSERT INTO extensions (`id`, `context`, `exten`, `priority`, `app`, `appdata`) VALUES ('51', 'internal', '0190104104', '3', 'Hangup', '');
