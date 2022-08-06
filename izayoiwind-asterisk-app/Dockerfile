@@ -2,17 +2,26 @@ FROM izayoiwind-asterisk-base:latest
 
 # ダウンロード
 WORKDIR /usr/local/src/
-COPY resources/asterisk/asterisk-18.11.2.tar.gz /usr/local/src/
-RUN tar xvf asterisk-18.11.2.tar.gz
+COPY resources/asterisk/asterisk-18.13.0.tar.gz /usr/local/src/
+RUN tar xvf asterisk-18.13.0.tar.gz
 
 # ビルド
-WORKDIR /usr/local/src/asterisk-18.11.2
-RUN ./configure --with-jansson-bundled
-RUN make
-RUN make install
-RUN make samples
-
-RUN mkdir -p /var/lib/asterisk/sounds/ja
+WORKDIR /usr/local/src/asterisk-18.13.0
+RUN ./configure --with-jansson-bundled && \
+    make menuselect.makeopts && \
+    menuselect/menuselect \
+    --enable CORE-SOUNDS-JA-WAV \
+    --enable CORE-SOUNDS-JA-ULAW \
+    --enable CORE-SOUNDS-JA-ALAW \
+    --enable CORE-SOUNDS-JA-GSM \
+    --enable CORE-SOUNDS-JA-G729 \
+    --enable CORE-SOUNDS-JA-G722 \
+    --enable CORE-SOUNDS-JA-SLN16 \
+    --enable CORE-SOUNDS-JA-SIREN7 \
+    --enable CORE-SOUNDS-JA-SIREN14 && \
+    make && \
+    make install && \
+    make samples
 
 # 設定ファイルをコピー
 COPY resources/config/etc/odbc.ini /etc/
