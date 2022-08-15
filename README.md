@@ -168,7 +168,7 @@ gsmとwavの2つの形式で同梱しております。（実際に使用する�
 * /izayoiwind-asterisk-base/resources/mysql-connector-odbc/*  
 
 ソースコードについては、以下のサイトよりダウンロード可能です。  
-[https://dev.mysql.com/downloads/mysql/5.5.html](https://dev.mysql.com/downloads/mysql/5.5.html)
+[https://dev.mysql.com/downloads/mysql/5.5.html](https://dev.mysql.com/downloads/mysql/5.5.html)  
 [https://dev.mysql.com/downloads/connector/odbc/](https://dev.mysql.com/downloads/connector/odbc/)
 
 ### 6.3. VOICEVOX関連
