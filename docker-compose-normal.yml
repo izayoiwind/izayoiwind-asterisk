@@ -11,7 +11,7 @@ services:
       BIND-ADDRESS: 0.0.0.0
     command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     volumes:
-    - ./izayoiwind-asterisk-db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    - ./izayoiwind-asterisk-db/normal/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     network_mode: "host"
   # App
   izayoiwind-asterisk-app:

@@ -8,20 +8,23 @@ SET @max_contacts = 1;
 -- レジスト時にコンタクトURIにランダムの値を用いる機種において、
 -- 電源投入後約30分で着信不能になる事象を抑制することが可能。
 SET @remove_existing = 'yes';
--- 疎通確認の間隔、NATを越える場合で着信ができなくなる場合は10等を設定するとよい。
+-- 疎通確認の間隔、NATを越える場合で着信ができなくなる場合は10等を設定すると解消する場合がある。
 -- ただし、RT58i等のヤマハ製VoIPルータの場合、0以外にすると着信できなくなるため注意。
+-- この方法（内部的にはSIP OPTIONSパケットを送る）は相性があるため、
+-- 携帯電話等、バッテリーの持ちに影響が出る場合を除いて、
+-- 基本的にはコンタクトの有効期限を短くする方法を推奨する。
 SET @qualify_frequency = 0;
 -- DTMFモード、基本的にautoでよい。
 SET @dtmf_mode = 'auto';
--- ポートが存在しない場合でも強制的に要求を送る設定。
--- 基本的にyesでよい。特にNAT越えの場合はyesを推奨。
-SET @force_rport = 'yes';
+-- ポートが存在しない場合でも強制的に要求を送る設定。NAT越えの場合はyesとする。
+SET @force_rport = 'no';
 -- コンタクトのIPアドレス、ポートの書き換えを許容するかどうかの設定。NAT越えの場合はyesとする。
 SET @rewrite_contact = 'no';
 -- RTPの送信先を、Asteriskが受信したIPアドレスおよびポートに送る設定。NAT越えの場合はyesとする。
 SET @rtp_symmetric = 'no';
 -- コンタクトの有効期限。デフォルトでは3600秒である。
-SET @maximum_expiration = 3600;
+-- NATテーブルによるタイムアウトの場合、この時間を短くすることでも解消できる。
+SET @maximum_expiration = 240;
 -- 使用できないコンタクトを削除するかどうか。
 SET @remove_unavailable = 'yes';
 
@@ -43,17 +46,3 @@ INSERT INTO ps_endpoints (id, transport, aors, auth, context, disallow, allow, d
 INSERT INTO ps_globals (id, keep_alive_interval) VALUES ('210001', 100);
 INSERT INTO ps_globals (id, keep_alive_interval) VALUES ('210002', 100);
 INSERT INTO ps_globals (id, keep_alive_interval) VALUES ('210003', 100);
-
--- 公衆電話
-INSERT INTO ps_aors (id, max_contacts, remove_existing, qualify_frequency, maximum_expiration, remove_unavailable) VALUES ('9111010001', @max_contacts, @remove_existing, @qualify_frequency, @maximum_expiration, @remove_unavailable);
-INSERT INTO ps_aors (id, max_contacts, remove_existing, qualify_frequency, maximum_expiration, remove_unavailable) VALUES ('9111010002', @max_contacts, @remove_existing, @qualify_frequency, @maximum_expiration, @remove_unavailable);
-INSERT INTO ps_aors (id, max_contacts, remove_existing, qualify_frequency, maximum_expiration, remove_unavailable) VALUES ('9111010003', @max_contacts, @remove_existing, @qualify_frequency, @maximum_expiration, @remove_unavailable);
-INSERT INTO ps_auths (id, auth_type, password, username) VALUES ('9111010001', 'userpass', '9111010001', '9111010001');
-INSERT INTO ps_auths (id, auth_type, password, username) VALUES ('9111010002', 'userpass', '9111010002', '9111010002');
-INSERT INTO ps_auths (id, auth_type, password, username) VALUES ('9111010003', 'userpass', '9111010003', '9111010003');
-INSERT INTO ps_endpoints (id, transport, aors, auth, context, disallow, allow, direct_media, dtmf_mode, force_rport, rewrite_contact, rtp_symmetric, language) VALUES ('9111010001', 'transport-udp', '9111010001', '9111010001', 'internal', 'all', 'g726,g722,ulaw,alaw,gsm', 'no', @dtmf_mode, @force_rport, @rewrite_contact, @rtp_symmetric, 'ja');
-INSERT INTO ps_endpoints (id, transport, aors, auth, context, disallow, allow, direct_media, dtmf_mode, force_rport, rewrite_contact, rtp_symmetric, language) VALUES ('9111010002', 'transport-udp', '9111010002', '9111010002', 'internal', 'all', 'g726,g722,ulaw,alaw,gsm', 'no', @dtmf_mode, @force_rport, @rewrite_contact, @rtp_symmetric, 'ja');
-INSERT INTO ps_endpoints (id, transport, aors, auth, context, disallow, allow, direct_media, dtmf_mode, force_rport, rewrite_contact, rtp_symmetric, language) VALUES ('9111010003', 'transport-udp', '9111010003', '9111010003', 'internal', 'all', 'g726,g722,ulaw,alaw,gsm', 'no', @dtmf_mode, @force_rport, @rewrite_contact, @rtp_symmetric, 'ja');
-INSERT INTO ps_globals (id, keep_alive_interval) VALUES ('9111010001', 100);
-INSERT INTO ps_globals (id, keep_alive_interval) VALUES ('9111010002', 100);
-INSERT INTO ps_globals (id, keep_alive_interval) VALUES ('9111010003', 100);
